@@ -37,9 +37,9 @@ export default (): JSX.Element => {
   const addLike = async (likerEmail: string, likedEmail: string) => {
     try {
       const response = await fetch(`${process.env.EXPO_PUBLIC_API}/add-like`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           likerEmail: likerEmail,
@@ -50,25 +50,28 @@ export default (): JSX.Element => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Like added successfully:', data);
+        console.log("Like added successfully:", data);
       } else {
-        console.error('Failed to add like:', data);
+        console.error("Failed to add like:", data);
       }
     } catch (error) {
-      console.error('Error adding like:', error);
+      console.error("Error adding like:", error);
     }
   };
 
   async function fetchRecommendations() {
     console.log("\x1b[34m[Fetching] Requesting recommendations for:", email);
     try {
-      const res = await fetch(`${process.env.EXPO_PUBLIC_API}/get-recommendations`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${process.env.EXPO_PUBLIC_API}/get-recommendations`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
         },
-        body: JSON.stringify({ email }),
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -76,7 +79,10 @@ export default (): JSX.Element => {
 
       const data = await res.json();
       setRecommendations(data.recommendations);
-      console.log("\x1b[32m[Debug] Recommendations fetched:", data.recommendations);
+      console.log(
+        "\x1b[32m[Debug] Recommendations fetched:",
+        data.recommendations,
+      );
     } catch (error: any) {
       console.log("\x1b[31m[Error] Fetch failed:", error);
       setError(error.message);
@@ -92,8 +98,13 @@ export default (): JSX.Element => {
 
   const handleSwipeRight = () => {
     console.log("\x1b[34m[Info] Handle swipe right invoked.");
-    console.log("\x1b[34m[Debug] User Gender:", userGender, "Subscription:", userSubscription);
-    if (userGender === 'male' && userSubscription === 'free') {
+    console.log(
+      "\x1b[34m[Debug] User Gender:",
+      userGender,
+      "Subscription:",
+      userSubscription,
+    );
+    if (userGender === "male" && userSubscription === "free") {
       Alert.alert(
         "Subscription Required",
         "You need to subscribe to swipe right.",
@@ -109,7 +120,7 @@ export default (): JSX.Element => {
             text: "Cancel",
             style: "cancel",
           },
-        ]
+        ],
       );
     } else {
       heartOpacity.value = 1; // Show heart
@@ -180,8 +191,12 @@ export default (): JSX.Element => {
   const renderNoMoreCards = () => {
     return (
       <View style={styles.noMoreCardsContainer}>
-        <Text style={styles.noMoreCardsText}>🎉 All profiles are swiped! 🎉</Text>
-        <Text style={styles.noMoreCardsSubText}>Come back later for more recommendations.</Text>
+        <Text style={styles.noMoreCardsText}>
+          🎉 All profiles are swiped! 🎉
+        </Text>
+        <Text style={styles.noMoreCardsSubText}>
+          Come back later for more recommendations.
+        </Text>
         <Ionicons name="happy-outline" size={50} color="#8B5CF6" />
       </View>
     );
@@ -211,15 +226,19 @@ export default (): JSX.Element => {
         cards={recommendations}
         renderCard={renderCard}
         onSwipedRight={(cardIndex) => {
-
           console.log("\x1b[34m[Debug] udta chirag");
           console.log(email),
             console.log(recommendations[cardIndex].email),
             addLike(email, recommendations[cardIndex].email);
-          console.log("\x1b[34m[Debug] Attempting to swipe right on card index:", cardIndex);
+          console.log(
+            "\x1b[34m[Debug] Attempting to swipe right on card index:",
+            cardIndex,
+          );
           handleSwipeRight();
         }}
-        onSwiped={(cardIndex: number) => console.log("\x1b[34m[Debug] Swiped card index:", cardIndex)}
+        onSwiped={(cardIndex: number) =>
+          console.log("\x1b[34m[Debug] Swiped card index:", cardIndex)
+        }
         onSwipedAll={() => {
           console.log("\x1b[34m[Info] All profiles swiped.");
           setAllProfilesSwiped(true);
@@ -323,6 +342,6 @@ const styles = StyleSheet.create({
   heart: {
     position: "absolute",
     top: height / 2 - 100, // Center the heart vertically
-    left: width / 2 - 50,  // Center the heart horizontally
+    left: width / 2 - 50, // Center the heart horizontally
   },
 });

@@ -27,10 +27,7 @@
       "output": "static",
       "favicon": "./assets/logo.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     },

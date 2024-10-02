@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  BackHandler,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Zap, Crown, Check } from "lucide-react-native";
 import { useAtomValue } from "jotai";
@@ -22,15 +29,15 @@ const SubscriptionScreen: React.FC = () => {
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        router.push('/(tabs)/profileScreen'); // Replace with your main screen route
+        router.push("/(tabs)/profileScreen"); // Replace with your main screen route
         return true; // Prevent default behavior
       };
 
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
 
       return () =>
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, [])
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, []),
   );
 
   return (
@@ -85,8 +92,8 @@ const PlanCard: React.FC<PlanCardProps> = ({
         {
           text: "OK",
           onPress: () => console.log("Beta message acknowledged"),
-        }
-      ]
+        },
+      ],
     );
   };
 
