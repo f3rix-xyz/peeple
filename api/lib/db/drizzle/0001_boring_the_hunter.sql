@@ -1,0 +1,1 @@
+ALTER TABLE "peeple_api_users" ALTER COLUMN "subscription" SET DEFAULT 'free';

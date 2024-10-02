@@ -1,0 +1,458 @@
+{
+  "id": "858a2952-7eb1-4d5c-acf4-0b74163a2b3b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.peeple_api_likes": {
+      "name": "peeple_api_likes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "likerEmail": {
+          "name": "likerEmail",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "likedEmail": {
+          "name": "likedEmail",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_likes_likerEmail_peeple_api_users_email_fk": {
+          "name": "peeple_api_likes_likerEmail_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_likes",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["likerEmail"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "peeple_api_likes_likedEmail_peeple_api_users_email_fk": {
+          "name": "peeple_api_likes_likedEmail_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_likes",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["likedEmail"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_matches": {
+      "name": "peeple_api_matches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user1id": {
+          "name": "user1id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user2id": {
+          "name": "user2id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "matchedat": {
+          "name": "matchedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_matches_user1id_peeple_api_users_id_fk": {
+          "name": "peeple_api_matches_user1id_peeple_api_users_id_fk",
+          "tableFrom": "peeple_api_matches",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["user1id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "peeple_api_matches_user2id_peeple_api_users_id_fk": {
+          "name": "peeple_api_matches_user2id_peeple_api_users_id_fk",
+          "tableFrom": "peeple_api_matches",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["user2id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_messages": {
+      "name": "peeple_api_messages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "senderEmail": {
+          "name": "senderEmail",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "receiverEmail": {
+          "name": "receiverEmail",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sentat": {
+          "name": "sentat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "isread": {
+          "name": "isread",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_messages_senderEmail_peeple_api_users_email_fk": {
+          "name": "peeple_api_messages_senderEmail_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_messages",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["senderEmail"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "peeple_api_messages_receiverEmail_peeple_api_users_email_fk": {
+          "name": "peeple_api_messages_receiverEmail_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_messages",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["receiverEmail"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_pictures": {
+      "name": "peeple_api_pictures",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_pictures_email_peeple_api_users_email_fk": {
+          "name": "peeple_api_pictures_email_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_pictures",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["email"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_profileimages": {
+      "name": "peeple_api_profileimages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "imageNo": {
+          "name": "imageNo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_profileimages_email_peeple_api_users_email_fk": {
+          "name": "peeple_api_profileimages_email_peeple_api_users_email_fk",
+          "tableFrom": "peeple_api_profileimages",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["email"],
+          "columnsTo": ["email"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_userpreferences": {
+      "name": "peeple_api_userpreferences",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userid": {
+          "name": "userid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "agerange": {
+          "name": "agerange",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "genderpreference": {
+          "name": "genderpreference",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "relationshiptypepreference": {
+          "name": "relationshiptypepreference",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "maxdistance": {
+          "name": "maxdistance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "peeple_api_userpreferences_userid_peeple_api_users_id_fk": {
+          "name": "peeple_api_userpreferences_userid_peeple_api_users_id_fk",
+          "tableFrom": "peeple_api_userpreferences",
+          "tableTo": "peeple_api_users",
+          "columnsFrom": ["userid"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.peeple_api_users": {
+      "name": "peeple_api_users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location": {
+          "name": "location",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gender": {
+          "name": "gender",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "relationshiptype": {
+          "name": "relationshiptype",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "religion": {
+          "name": "religion",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_field": {
+          "name": "occupation_field",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_area": {
+          "name": "occupation_area",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drink": {
+          "name": "drink",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "smoke": {
+          "name": "smoke",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "month": {
+          "name": "month",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "year": {
+          "name": "year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription": {
+          "name": "subscription",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "instaid": {
+          "name": "instaid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "peeple_api_users_email_unique": {
+          "name": "peeple_api_users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": ["email"]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
